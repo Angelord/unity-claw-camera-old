@@ -2,7 +2,7 @@
 
 namespace Claw.CameraControl {
     [RequireComponent(typeof(Camera))]
-    public class CameraBehaviour : MonoBehaviour {
+    public abstract class CameraBehaviour : MonoBehaviour {
 
         private Camera _camera;
 
