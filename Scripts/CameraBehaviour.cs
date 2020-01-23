@@ -10,6 +10,10 @@ namespace Claw.CameraControl {
 
         private void Start() {
             _camera = GetComponent<Camera>();
+            
+            OnStart();
         }
+
+        protected virtual void OnStart() { }
     }
 }
