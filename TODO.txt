@@ -1,0 +1,3 @@
+﻿Zoom To Fit
+    - Adjust orthographic size to keep two or more objects in view of the camera
+
