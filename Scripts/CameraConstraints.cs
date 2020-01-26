@@ -3,7 +3,7 @@
 namespace Claw.CameraControl {
     public class CameraConstraints : CameraBehaviour {
 
-        public Bounds2D Bounds = new Bounds2D(Vector2.zero, new Vector2(10.0f, 10.0f));
+        public Bounds2D Bounds = new Bounds2D(Vector2.zero, new Vector2(30.0f, 20.0f));
         public bool XAxis = true;
         public bool YAxis = true;
         private Vector3 _posLastFrame;
