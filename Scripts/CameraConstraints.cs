@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Claw.Objects;
+using UnityEngine;
 
 namespace Claw.CameraControl {
     public class CameraConstraints : CameraBehaviour {
 
-        public Bounds2D Bounds = new Bounds2D(Vector2.zero, new Vector2(30.0f, 20.0f));
+        public WorldBounds2D Bounds;
         public bool XAxis = true;
         public bool YAxis = true;
         private Vector3 _posLastFrame;
@@ -13,6 +14,8 @@ namespace Claw.CameraControl {
         }
 
         private void LateUpdate() {
+            if(Bounds == null) return;
+            
             Vector2 cameraBottomLeft = Camera.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f));
             Vector2 cameraTopRight = Camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
 
@@ -59,6 +62,8 @@ namespace Claw.CameraControl {
         #region EditorOnly
         
         private void OnDrawGizmosSelected() {
+            if(Bounds == null) return;
+            
             Gizmos.color = Color.blue;
 
             if (XAxis) {

@@ -5,7 +5,7 @@ namespace Claw.CameraControl {
     public class PanCamera : CameraBehaviour {
 
         [Range(0.0f, 0.4f)] public float Margin = 0.08f;
-        public float Speed = 5.0f;
+        public float Speed = 10.0f;
         public string HorizontalInputAxis = "Horizontal";
         public string VerticalInputAxis = "Vertical";
 
