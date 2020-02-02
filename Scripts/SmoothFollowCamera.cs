@@ -4,11 +4,20 @@ using UnityEngine;
 namespace Claw.CameraControl {
     public class SmoothFollowCamera : CameraBehaviour {
 
+        public bool FocusAtStart = true;
         public float MinSpeed = 1.0f;
         public float MaxSpeed = 5.0f;
         public float MaxSpeedDistance = 3.0f;
         [SerializeField] private List<Transform> _targets = new List<Transform>();
-        
+
+        private void Start() {
+            if (FocusAtStart) {
+                Vector3 targetPos = CalculateTargetCenter();
+                targetPos.z = transform.position.z;
+                transform.position = targetPos;
+            }
+        }
+
         private void Update() {
             
             if(_targets.Count == 0) return;
