@@ -1,10 +1,9 @@
-﻿using Claw.Objects;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Claw.CameraControl {
     public class CameraConstraints : CameraBehaviour {
 
-        public WorldBounds2D Bounds;
+        public Bounds Bounds;
         public bool XAxis = true;
         public bool YAxis = true;
         private Vector3 _posLastFrame;
@@ -14,8 +13,6 @@ namespace Claw.CameraControl {
         }
 
         private void LateUpdate() {
-            if(Bounds == null) return;
-            
             Vector2 cameraBottomLeft = Camera.ScreenToWorldPoint(new Vector3(0.0f + Screen.width * Camera.rect.x, 0.0f, 0.0f));
             Vector2 cameraTopRight = Camera.ScreenToWorldPoint(new Vector3(cameraBottomLeft.x + Screen.width - Screen.width * Camera.rect.width, Screen.height, 0.0f));
 
@@ -23,8 +20,8 @@ namespace Claw.CameraControl {
 
             if (XAxis) {
                 adjustmentOffset.x = CalculateOffset(
-                    Bounds.Left,
-                    Bounds.Right,
+                    Bounds.min.x,
+                    Bounds.max.x,
                     cameraBottomLeft.x,
                     cameraTopRight.x,
                     _posLastFrame.x - transform.position.x);
@@ -32,8 +29,8 @@ namespace Claw.CameraControl {
 
             if (YAxis) {
                 adjustmentOffset.y = CalculateOffset(
-                    Bounds.Bottom,
-                    Bounds.Top,
+                    Bounds.min.y,
+                    Bounds.max.y,
                     cameraBottomLeft.y,
                     cameraTopRight.y,
                     _posLastFrame.y - transform.position.y);
@@ -67,13 +64,13 @@ namespace Claw.CameraControl {
             Gizmos.color = Color.blue;
 
             if (XAxis) {
-                Gizmos.DrawLine(Bounds.BottomLeft, Bounds.TopLeft);
-                Gizmos.DrawLine(Bounds.BottomRight, Bounds.TopRight);
+                Gizmos.DrawLine(Bounds.BottomLeft(), Bounds.TopLeft());
+                Gizmos.DrawLine(Bounds.BottomRight(), Bounds.TopRight());
             }
 
             if (YAxis) {
-                Gizmos.DrawLine(Bounds.TopLeft, Bounds.TopRight);
-                Gizmos.DrawLine(Bounds.BottomLeft, Bounds.BottomRight);
+                Gizmos.DrawLine(Bounds.TopLeft(), Bounds.TopRight());
+                Gizmos.DrawLine(Bounds.BottomLeft(), Bounds.BottomRight());
             }
         }
         #endregion
