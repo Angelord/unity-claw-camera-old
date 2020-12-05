@@ -7,7 +7,7 @@ namespace Claw.CameraControl {
         public bool XAxis = true;
         public bool YAxis = true;
         private Vector3 _posLastFrame;
-
+        
         protected override void OnStart() {
             _posLastFrame = transform.position;
         }

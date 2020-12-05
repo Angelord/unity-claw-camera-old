@@ -44,18 +44,20 @@ namespace Claw.CameraControl {
             Vector2 moveDir = position - (Vector2)transform.position;
 
             float magnitude = moveDir.magnitude;
+
+            float speed = Mathf.Lerp(MinSpeed, MaxSpeed, magnitude / MaxSpeedDistance);
             
-            if (magnitude <= MinSpeed * Time.deltaTime) {
+            float step = Time.deltaTime * speed;
+            if (magnitude < step) {
                 transform.Translate(moveDir);
                 return;
             }
+            
+            if (magnitude > 1.0f) {
+                moveDir.Normalize();
+            }
 
-            float lerpFactor = Mathf.Clamp(magnitude / MaxSpeedDistance, 0.0f, 1.0f);
-            float speed = MinSpeed + (MaxSpeed - MinSpeed) * lerpFactor;
-            
-            moveDir.Normalize();
-            
-            transform.Translate(speed * Time.deltaTime * moveDir);
+            transform.Translate(step * moveDir);
         }
         
         #region EditorOnly
