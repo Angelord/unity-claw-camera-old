@@ -1,5 +1,4 @@
-﻿using LordOfDust.Utility.Structures;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Claw.CameraControl {
     public static class BoundsEx {

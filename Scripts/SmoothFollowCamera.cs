@@ -62,6 +62,8 @@ namespace Claw.CameraControl {
 
         private void OnDrawGizmosSelected() {
 
+            if(_targets == null || _targets.Count == 0) return;
+            
             Gizmos.color = Color.yellow;
 
             Vector2 center = CalculateTargetCenter();

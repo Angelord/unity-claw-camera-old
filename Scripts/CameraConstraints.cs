@@ -13,11 +13,11 @@ namespace Claw.CameraControl {
         }
 
         private void LateUpdate() {
-            Vector2 cameraBottomLeft = Camera.ScreenToWorldPoint(new Vector3(0.0f + Screen.width * Camera.rect.x, 0.0f, 0.0f));
-            Vector2 cameraTopRight = Camera.ScreenToWorldPoint(new Vector3(cameraBottomLeft.x + Screen.width - Screen.width * Camera.rect.width, Screen.height, 0.0f));
+            Vector2 cameraBottomLeft = Camera.ScreenToWorldPoint(new Vector3(Screen.width * Camera.rect.xMin, Screen.height * Camera.rect.yMin, 0.0f));
+            Vector2 cameraTopRight = Camera.ScreenToWorldPoint(new Vector3(Screen.width * Camera.rect.xMax, Screen.height * Camera.rect.yMax, 0.0f));
 
             Vector3 adjustmentOffset = Vector2.zero;
-
+            
             if (XAxis) {
                 adjustmentOffset.x = CalculateOffset(
                     Bounds.min.x,
@@ -46,33 +46,14 @@ namespace Claw.CameraControl {
             if (minOverflow && maxOverflow) {    // If we're overflowing in both directions, it is better to lock the camera from any movement.
                 return posDiffLastFrame;
             }
-            else if (minOverflow) {
+            if (minOverflow) {
                 return boundsMin - camMin;
             }
-            else if (maxOverflow) {
+            if (maxOverflow) {
                 return boundsMax - camMax;
             }
 
             return 0.0f;
         }
-
-        #region EditorOnly
-        
-        private void OnDrawGizmosSelected() {
-            if(Bounds == null) return;
-            
-            Gizmos.color = Color.blue;
-
-            if (XAxis) {
-                Gizmos.DrawLine(Bounds.BottomLeft(), Bounds.TopLeft());
-                Gizmos.DrawLine(Bounds.BottomRight(), Bounds.TopRight());
-            }
-
-            if (YAxis) {
-                Gizmos.DrawLine(Bounds.TopLeft(), Bounds.TopRight());
-                Gizmos.DrawLine(Bounds.BottomLeft(), Bounds.BottomRight());
-            }
-        }
-        #endregion
     }
 }
