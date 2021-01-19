@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Claw.CameraControl {
+namespace Claw.Camera {
     public static class BoundsEx {
 
         public static Vector2 BottomLeft(this Bounds bounds) {

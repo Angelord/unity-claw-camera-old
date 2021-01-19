@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Claw.CameraControl {
+namespace Claw.Camera {
     public class CameraConstraints : CameraBehaviour {
 
         [SerializeField] private Bounds bounds;

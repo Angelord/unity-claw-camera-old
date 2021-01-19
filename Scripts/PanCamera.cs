@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Claw.CameraControl {
+namespace Claw.Camera {
     public class PanCamera : CameraBehaviour {
 
         [SerializeField][Range(0.0f, 0.4f)] private float margin = 0.08f;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Claw.CameraControl {
+namespace Claw.Camera {
     public class ZoomOrthographicCamera : CameraBehaviour {
 
         [SerializeField] private float zoomSpeed = 5.0f;

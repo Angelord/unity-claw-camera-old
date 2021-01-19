@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Claw.CameraControl {
+namespace Claw.Camera {
 
     public class ZoomToFitCamera : CameraBehaviour {
 

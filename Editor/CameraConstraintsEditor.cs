@@ -1,7 +1,6 @@
-﻿using Claw.CameraControl;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
+﻿using UnityEditor;
 using UnityEngine;
+using UnityEditor.IMGUI.Controls;
 
 namespace Claw.Camera.Editors {
     [CustomEditor(typeof(CameraConstraints)), CanEditMultipleObjects]

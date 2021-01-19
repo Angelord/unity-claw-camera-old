@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Claw.CameraControl {
+namespace Claw.Camera {
     public class SmoothFollowCamera : CameraBehaviour {
 
         [SerializeField] private bool focusAtStart = true;
