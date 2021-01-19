@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 
 namespace Claw.CameraControl {
+    /// <summary>
+    /// Base class for camera-related behaviours. Gives easy access to the attached camera component.
+    /// </summary>
     [RequireComponent(typeof(Camera))]
     public abstract class CameraBehaviour : MonoBehaviour {
 
-        private Camera _camera;
+        private new Camera camera;
 
-        protected Camera Camera { get { return _camera;  } }
+        protected Camera Camera => camera;
 
         private void Start() {
-            _camera = GetComponent<Camera>();
+            camera = GetComponent<Camera>();
             
             OnStart();
         }

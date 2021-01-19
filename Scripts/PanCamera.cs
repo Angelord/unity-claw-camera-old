@@ -4,10 +4,10 @@ using UnityEngine;
 namespace Claw.CameraControl {
     public class PanCamera : CameraBehaviour {
 
-        [Range(0.0f, 0.4f)] public float Margin = 0.08f;
-        public float Speed = 10.0f;
-        public string HorizontalInputAxis = "Horizontal";
-        public string VerticalInputAxis = "Vertical";
+        [SerializeField][Range(0.0f, 0.4f)] private float margin = 0.08f;
+        [SerializeField] public float speed = 10.0f;
+        [SerializeField] public string horizontalInputAxis = "Horizontal";
+        [SerializeField] public string verticalInputAxis = "Vertical";
 
         private void Update() {
          
@@ -21,19 +21,19 @@ namespace Claw.CameraControl {
             pan.x = CalculatePan(mousePosXNormalized);
             pan.y = CalculatePan(mousePosYNormalized);
             
-            pan.x += Input.GetAxis(HorizontalInputAxis);
-            pan.y += Input.GetAxis(VerticalInputAxis);
+            pan.x += Input.GetAxis(horizontalInputAxis);
+            pan.y += Input.GetAxis(verticalInputAxis);
             
             pan.Normalize();
 
-            transform.Translate(Speed * Time.deltaTime * (Vector3)pan);
+            transform.Translate(speed * Time.deltaTime * (Vector3)pan);
         }
 
         private float CalculatePan(float mousePosNormalized) {
-            if (mousePosNormalized < Margin) {
+            if (mousePosNormalized < margin) {
                 return -1.0f;
             }
-            if (mousePosNormalized > 1.0f - Margin) {
+            if (mousePosNormalized > 1.0f - margin) {
                 return 1.0f;
             }
 

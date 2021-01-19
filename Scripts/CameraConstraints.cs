@@ -3,13 +3,16 @@
 namespace Claw.CameraControl {
     public class CameraConstraints : CameraBehaviour {
 
-        public Bounds Bounds;
-        public bool XAxis = true;
-        public bool YAxis = true;
-        private Vector3 _posLastFrame;
+        [SerializeField] private Bounds bounds;
+        [SerializeField] private bool xAxis = true;
+        [SerializeField] private bool yAxis = true;
         
+        private Vector3 posLastFrame;
+
+        public Bounds Bounds { get => bounds; set => bounds = value; }
+
         protected override void OnStart() {
-            _posLastFrame = transform.position;
+            posLastFrame = transform.position;
         }
 
         private void LateUpdate() {
@@ -18,22 +21,22 @@ namespace Claw.CameraControl {
 
             Vector3 adjustmentOffset = Vector2.zero;
             
-            if (XAxis) {
+            if (xAxis) {
                 adjustmentOffset.x = CalculateOffset(
-                    Bounds.min.x,
-                    Bounds.max.x,
+                    bounds.min.x,
+                    bounds.max.x,
                     cameraBottomLeft.x,
                     cameraTopRight.x,
-                    _posLastFrame.x - transform.position.x);
+                    posLastFrame.x - transform.position.x);
             }
 
-            if (YAxis) {
+            if (yAxis) {
                 adjustmentOffset.y = CalculateOffset(
-                    Bounds.min.y,
-                    Bounds.max.y,
+                    bounds.min.y,
+                    bounds.max.y,
                     cameraBottomLeft.y,
                     cameraTopRight.y,
-                    _posLastFrame.y - transform.position.y);
+                    posLastFrame.y - transform.position.y);
             }
 
             transform.position += adjustmentOffset;

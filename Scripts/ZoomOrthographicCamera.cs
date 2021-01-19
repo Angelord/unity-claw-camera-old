@@ -3,17 +3,17 @@
 namespace Claw.CameraControl {
     public class ZoomOrthographicCamera : CameraBehaviour {
 
-        public float ZoomSpeed = 5.0f;
-        public float MaxOrthographicSize = 7.0f;
-        public float MinOrthographicSize = 4.0f; 
-        public string InputAxis = "Mouse ScrollWheel";
+        [SerializeField] private float zoomSpeed = 5.0f;
+        [SerializeField] private float maxOrthographicSize = 7.0f;
+        [SerializeField] private float minOrthographicSize = 4.0f; 
+        [SerializeField] private string inputAxis = "Mouse ScrollWheel";
 
         private void Update() {
             
             float orthographicSize = Camera.orthographicSize;
-            orthographicSize -= Input.GetAxis(InputAxis) * ZoomSpeed * Time.deltaTime;
+            orthographicSize -= Input.GetAxis(inputAxis) * zoomSpeed * Time.deltaTime;
             
-            Camera.orthographicSize = Mathf.Clamp(orthographicSize, MinOrthographicSize, MaxOrthographicSize);
+            Camera.orthographicSize = Mathf.Clamp(orthographicSize, minOrthographicSize, maxOrthographicSize);
         }
     }
 }

@@ -5,11 +5,11 @@ namespace Claw.CameraControl {
 
     public class ZoomToFitCamera : CameraBehaviour {
 
-        public float MinOrthographicSize = 3.0f;
-        public float MinZoomSpeed = 0.5f;    // The speed at the outer border
-        public float MaxZoomSpeed = 1.0f;    // The speed at the margin
-        [Range(0.0f, 1.0f)] public float Margin = 0.1f;    // How much space is left between the targets and the edge of the screen
-        [SerializeField] private List<Transform> _targets = new List<Transform>();
+        [SerializeField] private float minOrthographicSize = 3.0f;
+        [SerializeField] private float minZoomSpeed = 0.5f;    // The speed at the outer border
+        [SerializeField] private float maxZoomSpeed = 1.0f;    // The speed at the margin
+        [SerializeField][Range(0.0f, 1.0f)] private float margin = 0.1f;    // How much space is left between the targets and the edge of the screen
+        [SerializeField] private List<Transform> targets = new List<Transform>();
         
         private void Update() {
 
@@ -24,7 +24,7 @@ namespace Claw.CameraControl {
             
             Vector2 targetExtents = Vector2.zero;
 
-            foreach (var target in _targets) {
+            foreach (var target in targets) {
 
                 Vector2 distance = target.position - transform.position;
                 distance.x = Mathf.Abs(distance.x);
@@ -43,7 +43,7 @@ namespace Claw.CameraControl {
             float screenRatio = Screen.height / (float)Screen.width;
             extents.x *= screenRatio;
 
-            return Mathf.Max(extents.x, extents.y) * (1.0f + Margin);
+            return Mathf.Max(extents.x, extents.y) * (1.0f + margin);
         }
 
         private void SmoothZoom(float targetOrthoSize) {
@@ -63,20 +63,20 @@ namespace Claw.CameraControl {
 
             curOrthoSize += Mathf.Sign(diff) * step;
 
-            curOrthoSize = Mathf.Clamp(curOrthoSize, MinOrthographicSize, float.MaxValue);
+            curOrthoSize = Mathf.Clamp(curOrthoSize, minOrthographicSize, float.MaxValue);
 
             Camera.orthographicSize = curOrthoSize;
         }
 
         private float CalculateSpeed(float targetOrthoSize, float curOrthoSize) {
 
-            float marginInUnits = curOrthoSize * Margin;
+            float marginInUnits = curOrthoSize * margin;
 
             float lerpFactor = (targetOrthoSize - curOrthoSize) / marginInUnits;
 
             lerpFactor = Mathf.Clamp(lerpFactor, 0.0f, 1.0f);
 
-            return MinZoomSpeed + (MaxZoomSpeed - MinZoomSpeed) * lerpFactor;
+            return minZoomSpeed + (maxZoomSpeed - minZoomSpeed) * lerpFactor;
         }
     }
 }
